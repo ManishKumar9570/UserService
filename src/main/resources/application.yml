@@ -18,6 +18,25 @@ spring:
     show-sql: true
   config:
     import: configserver:http://localhost:8086
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-07987265.okta.com/oauth2/default
+      client:
+        registration:
+          my-internal-client: #here any name you can give
+            provider: okta
+            authorizationGrantType: client_credentials
+            scope: internal
+            client-id: 0oaeqpp1tbCFy7iRu5d7
+            client-secret: nXS36XXM498eaTz8Zc7J5BRiS8PWwBr4TJWFUAzG5VyC4vGZbkX4Yh9fno6GQZa6
+        provider:
+          okta:
+            issuerUri: https://dev-07987265.okta.com/oauth2/default
+
+
 #    properties:
 #      hibernate:
 #        dialect: org.hibernate.dialect.MySQLDialect
@@ -75,3 +94,8 @@ resilience4j:
         limit-refresh-period: 4s
         limit-for-period: 2
         timeout-duration: 0s
+
+okta:
+  oauth2:
+    issuer: https://dev-07987265.okta.com/oauth2/default
+    audience: api://default
